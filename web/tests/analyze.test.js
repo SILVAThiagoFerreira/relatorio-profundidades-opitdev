@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import { analyzeDxf } from '../src/analyze.js';
+import { buildPdf } from '../src/export.js';
 const config = JSON.parse(fs.readFileSync(new URL('../../config.json', import.meta.url)));
 const source = fs.readFileSync(new URL('./fixture.dxf', import.meta.url),'utf8');
 test('DXF fixture produces the expected cardinality and missing record',()=>{
@@ -15,6 +16,13 @@ test('DXF fixture produces the expected cardinality and missing record',()=>{
 test('invalid and incomplete DXF fails visibly',()=>{
   assert.throws(()=>analyzeDxf('invalid',config));
   assert.throws(()=>analyzeDxf(source.replaceAll('Theoretical Hole','Removed Hole'),config),/Theoretical Hole/);
+});
+test('PDF export contains multiple valid pages when needed',()=>{
+  const base=analyzeDxf(source,config);
+  const report={...base,rows:Array.from({length:90},(_,i)=>({...base.rows[0],id:i+1}))};
+  const pdf=buildPdf(report,'TEST','20260924_000000');
+  assert.equal(pdf.getNumberOfPages(),3);
+  assert.ok(pdf.output().startsWith('%PDF-'));
 });
 test('operational DXF matches Python pipeline when available locally', {skip: !fs.existsSync(new URL('../../imput/opit.dxf', import.meta.url))},()=>{
   const actual=analyzeDxf(fs.readFileSync(new URL('../../imput/opit.dxf', import.meta.url),'utf8'),config);

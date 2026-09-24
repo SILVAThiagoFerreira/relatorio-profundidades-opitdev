@@ -14,7 +14,7 @@ export function exportCsv(result, planId, runId) {
   download(new Blob(['\ufeff',header.join(';'),'\r\n',lines.join('\r\n')], {type:'text/csv;charset=utf-8'}), `RELATORIO_PROFUNDIDADES_${planId}_${runId}.csv`);
 }
 
-export function exportPdf(result, planId, runId) {
+export function buildPdf(result, planId, runId) {
   const pdf = new jsPDF({unit:'mm',format:'a4'});
   const perPage = 44;
   const pages = Math.ceil(result.rows.length / perPage);
@@ -36,5 +36,9 @@ export function exportPdf(result, planId, runId) {
     });
     pdf.setDrawColor(210,218,225);pdf.line(14,282,196,282);pdf.setFontSize(8);pdf.setTextColor(90);pdf.text(`Gerado localmente  |  ${runId}`,14,287);pdf.text(`${page+1}/${pages}`,196,287,{align:'right'});
   }
-  pdf.save(`RELATORIO_PROFUNDIDADES_${planId}_${runId}.pdf`);
+  return pdf;
+}
+
+export function exportPdf(result, planId, runId) {
+  buildPdf(result, planId, runId).save(`RELATORIO_PROFUNDIDADES_${planId}_${runId}.pdf`);
 }
