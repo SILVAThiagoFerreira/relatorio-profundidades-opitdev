@@ -5,6 +5,8 @@
 Entrega web: publicar uma interface OpenBlast em repositorio proprio no GitHub Pages. A interface usa o DXF fornecido pelo usuario sem carregar dados operacionais no site, valida as camadas e IDs, compara profundidades e oferece PDF/CSV. A configuracao unica `config.json` fornece camadas, tolerancias, ID inicial e rotulos. O arquivo DXF original permanece em `imput/` e nao integra o repositorio publico.
 
 O PDF baixado pela interface deve usar o mesmo formato visual de `output/Profundidades - PC590926.pdf`, incluindo logo Enaex, faixa de ID do plano, tabela compacta de quatro colunas, 53 registros por pagina e rodape numerado.
+
+A interface deve oferecer `Gerar exemplo` usando uma amostra DXF fictícia publicada junto ao site, com aviso de demonstração e downloads de prévia.
 O projeto precisa gerar um relatorio reutilizavel para comparar profundidade prevista e realizada a partir das camadas de um arquivo DXF.
 
 ## Objetivo

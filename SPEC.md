@@ -29,6 +29,8 @@
 - No modo workbook alternativo, linhas incompletas seguem `rules.incomplete_row_policy`.
 
 ## Comportamento esperado
+- O comando web `Gerar exemplo` carrega somente o DXF demonstrativo configurado em `outputs.web_example`, identifica o resultado como demonstração e permite baixar PDF/CSV com essa amostra.
+- Dados e rótulos do exemplo permanecem separados da análise operacional; selecionar um DXF novo limpa o resultado anterior.
 - Registros conciliados entram na base analitica.
 - Registros fora do cruzamento ficam identificados nas listas de divergencia e nos logs; valores ausentes nao sao estimados.
 - Outliers permanecem no relatorio, mas sao excluidos do indicador principal.

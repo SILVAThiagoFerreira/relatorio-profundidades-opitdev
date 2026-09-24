@@ -8,6 +8,13 @@
 4. O resultado mostra totais e todos os furos previstos, inclusive os sem realizado.
 5. `web/src/export.js` carrega o logotipo, gera o PDF no layout do modelo fornecido e o CSV para download com identificador da execucao. Falhas aparecem na tela; arquivos operacionais nao sao enviados ao Pages.
 
+### Gerar exemplo
+
+1. `outputs.web_example` configura o DXF fictício e o ID de demonstração.
+2. O botão `Gerar exemplo` carrega esse DXF estático, valida e processa pelas mesmas regras de `web/src/analyze.js`.
+3. A interface identifica o resultado como demonstração e habilita a exportação de amostra em PDF/CSV.
+4. Escolher ou soltar um DXF local remove o resultado anterior e seu aviso.
+
 ## Pipeline Python local
 
 1. Carregar `config.json`, incluindo o formato e as regras de leitura.

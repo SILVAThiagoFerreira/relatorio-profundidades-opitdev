@@ -61,6 +61,10 @@
       "variation": "Variação (m)"
     },
     "brand_logo_file": "assets/enaex_logo.png",
+    "web_example": {
+      "dxf_file": "example-opit.dxf",
+      "plan_id": "EXEMPLO"
+    },
     "web_pdf_style": {
       "logo_file": "enaex-logo.png",
       "red": "#E31B23",

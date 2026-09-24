@@ -56,7 +56,7 @@ python -m unittest discover -s tests
 
 ## Interface GitHub Pages
 
-A interface em `web/` processa um DXF selecionado pelo usuário no próprio navegador. Ela mostra os furos, a aderência, as ausências e permite baixar PDF e CSV. Nenhum DXF, planilha ou relatório operacional é enviado ao servidor ou incluído na publicação. O ID do plano pode ser editado antes da análise. A planilha `imput/pp.xlsx` é uma referência da execução original; as profundidades desta ferramenta vêm das geometrias do DXF.
+A interface em `web/` processa um DXF selecionado pelo usuário no próprio navegador. Ela mostra os furos, a aderência, as ausências e permite baixar PDF e CSV. O botão **Gerar exemplo** usa um DXF sintético publicado com o site para preencher uma prévia e habilitar os downloads, sem anexos. Nenhum DXF, planilha ou relatório operacional é enviado ao servidor ou incluído na publicação. O ID do plano pode ser editado antes da análise. A planilha `imput/pp.xlsx` é uma referência da execução original; as profundidades desta ferramenta vêm das geometrias do DXF.
 
 ```bash
 npm ci --prefix web

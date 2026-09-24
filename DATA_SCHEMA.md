@@ -34,3 +34,9 @@ O modo `inputs.format = "workbook"` continua disponivel. Nesse modo, cada fonte 
 - Tabela e PDF: uniao de IDs previstos, com ID, profundidade prevista, realizada e variacao; ausencias ficam vazias. O PDF replica a tabela A4 do relatorio de referencia, com 53 registros por pagina, cabecalho repetido e pagina numerada.
 - CSV web: `ID;Prevista_m;Realizada_m;Desvio_m;Status;Outlier`, uma linha por furo previsto, inclusive ausencias.
 - A aderencia exclui outliers e considera `abs(variacao) <= rules.depth_tolerance_m`; outliers usam `rules.outlier_threshold_m`.
+
+## Amostra demonstrativa web
+
+- `outputs.web_example.dxf_file` aponta para um DXF sintético público, sem dados de operação.
+- `outputs.web_example.plan_id` identifica downloads e relatório como demonstração.
+- O exemplo passa pelo mesmo leitor, validador e comparador do DXF operacional.
