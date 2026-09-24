@@ -5,6 +5,7 @@ import { analyzeDxf } from '../src/analyze.js';
 import { buildPdf } from '../src/export.js';
 const config = JSON.parse(fs.readFileSync(new URL('../../config.json', import.meta.url)));
 const source = fs.readFileSync(new URL('./fixture.dxf', import.meta.url),'utf8');
+const logo = `data:image/png;base64,${fs.readFileSync(new URL('../../assets/enaex_logo.png', import.meta.url)).toString('base64')}`;
 test('DXF fixture produces the expected cardinality and missing record',()=>{
   const result=analyzeDxf(source,config);
   assert.equal(result.metrics.planned,2);
@@ -20,9 +21,10 @@ test('invalid and incomplete DXF fails visibly',()=>{
 test('PDF export contains multiple valid pages when needed',()=>{
   const base=analyzeDxf(source,config);
   const report={...base,rows:Array.from({length:90},(_,i)=>({...base.rows[0],id:i+1}))};
-  const pdf=buildPdf(report,'TEST','20260924_000000');
-  assert.equal(pdf.getNumberOfPages(),3);
+  const pdf=buildPdf(report,'TEST','20260924_000000',config,logo);
+  assert.equal(pdf.getNumberOfPages(),2);
   assert.ok(pdf.output().startsWith('%PDF-'));
+  assert.throws(()=>buildPdf(report,'TEST','20260924_000000',config),/Logotipo PNG/);
 });
 test('operational DXF matches Python pipeline when available locally', {skip: !fs.existsSync(new URL('../../imput/opit.dxf', import.meta.url))},()=>{
   const actual=analyzeDxf(fs.readFileSync(new URL('../../imput/opit.dxf', import.meta.url),'utf8'),config);

@@ -31,6 +31,6 @@ O modo `inputs.format = "workbook"` continua disponivel. Nesse modo, cada fonte 
 
 ## Saida web
 
-- Tabela e PDF: uniao de IDs previstos, com ID, profundidade prevista, realizada e variacao; ausencias ficam vazias.
+- Tabela e PDF: uniao de IDs previstos, com ID, profundidade prevista, realizada e variacao; ausencias ficam vazias. O PDF replica a tabela A4 do relatorio de referencia, com 53 registros por pagina, cabecalho repetido e pagina numerada.
 - CSV web: `ID;Prevista_m;Realizada_m;Desvio_m;Status;Outlier`, uma linha por furo previsto, inclusive ausencias.
 - A aderencia exclui outliers e considera `abs(variacao) <= rules.depth_tolerance_m`; outliers usam `rules.outlier_threshold_m`.

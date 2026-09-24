@@ -6,7 +6,7 @@
 2. O navegador le `Number` / `Theoretical Hole` / `Real Hole` conforme `config.json`.
 3. O modulo `web/src/analyze.js` valida estrutura, IDs, associacoes espaciais e profundidades antes de calcular.
 4. O resultado mostra totais e todos os furos previstos, inclusive os sem realizado.
-5. `web/src/export.js` gera PDF e CSV para download com identificador da execucao. Falhas aparecem na tela; arquivos operacionais nao sao enviados ao Pages.
+5. `web/src/export.js` carrega o logotipo, gera o PDF no layout do modelo fornecido e o CSV para download com identificador da execucao. Falhas aparecem na tela; arquivos operacionais nao sao enviados ao Pages.
 
 ## Pipeline Python local
 

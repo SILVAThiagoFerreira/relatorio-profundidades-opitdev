@@ -55,7 +55,7 @@
 - A associacao entre texto e geometria depende da tolerancia espacial configurada.
 - O comprimento de uma POLYLINE e medido pelos segmentos entre vertices 3D; curvas aproximadas por outros tipos de entidade nao sao aceitas neste modo.
 - O relatorio depende de bibliotecas Python instaladas localmente.
-- O GitHub Pages executa somente arquivos estaticos. Na interface, a validacao e o calculo ocorrem no navegador; a saida web em CSV usa ID, profundidades, desvio, status e outlier. O PDF web e uma tabela de consulta. O log persistente e a base CSV analitica completa continuam sendo entregues pelo pipeline Python local.
+- O GitHub Pages executa somente arquivos estaticos. Na interface, a validacao e o calculo ocorrem no navegador; a saida web em CSV usa ID, profundidades, desvio, status e outlier. O PDF web deve reproduzir o formato do PDF de referencia `output/Profundidades - PC590926.pdf`, com a identidade Enaex apenas no arquivo exportado. O log persistente e a base CSV analitica completa continuam sendo entregues pelo pipeline Python local.
 
 ## Criterios de sucesso
 - Arquivos gerados com nome identificavel.

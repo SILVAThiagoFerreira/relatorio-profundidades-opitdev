@@ -38,5 +38,9 @@ $('#analyze').addEventListener('click', async () => {
   } catch(error) {$('#error').textContent=error.message || 'Não foi possível ler o arquivo DXF.';$('#error').hidden=false;}
   finally {$('#analyze').disabled=false;$('#analyze').innerHTML='Validar e gerar relatório <span>→</span>';}
 });
-$('#pdf').addEventListener('click',()=>exportPdf(result,$('#plan-id').value.trim(),runId));
+$('#pdf').addEventListener('click',async()=>{
+  $('#error').hidden=true;
+  try {await exportPdf(result,$('#plan-id').value.trim(),runId,config,import.meta.env.BASE_URL);}
+  catch(error){$('#error').textContent=error.message||'Não foi possível gerar o PDF.';$('#error').hidden=false;$('#error').scrollIntoView({block:'center'});}
+});
 $('#csv').addEventListener('click',()=>exportCsv(result,$('#plan-id').value.trim(),runId));

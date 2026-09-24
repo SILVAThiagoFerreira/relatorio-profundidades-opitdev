@@ -64,7 +64,7 @@ npm test --prefix web
 npm run build --prefix web
 ```
 
-O GitHub Pages publica `web/dist` pelo workflow `.github/workflows/pages.yml`. `dxf-parser` interpreta o DXF no navegador, `jsPDF` gera o PDF e Vite empacota a página; as três dependências são necessárias para hospedagem estática sem servidor. O pipeline Python permanece disponível para saída local com log. Os formatos web de PDF e CSV incluem os campos de consulta; o CSV Python continua sendo a base analítica detalhada.
+O GitHub Pages publica `web/dist` pelo workflow `.github/workflows/pages.yml`. `dxf-parser` interpreta o DXF no navegador, `jsPDF` gera o PDF e Vite empacota a página; as três dependências são necessárias para hospedagem estática sem servidor. O pipeline Python permanece disponível para saída local com log. O PDF web reproduz o modelo `output/Profundidades - PC590926.pdf`: A4, logotipo Enaex, ID do plano, quatro colunas, 53 furos por página, linhas alternadas e numeração. Sua identidade específica de relatório não altera a interface OpenBlast. O CSV Python continua sendo a base analítica detalhada.
 
 ## Evolucao
 Para adicionar novas fontes, novas regras ou novos formatos de saida, atualize primeiro `config.json`, depois `SPEC.md`, `DATA_SCHEMA.md` e os testes correspondentes.

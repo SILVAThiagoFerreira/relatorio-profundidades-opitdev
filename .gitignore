@@ -10,3 +10,4 @@ logs/
 *.pdf
 *.xlsx
 .playwright-cli/
+tmp/

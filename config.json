@@ -60,7 +60,30 @@
       "realized": "Prof. realizada (m)",
       "variation": "Variação (m)"
     },
-    "brand_logo_file": "assets/enaex_logo.png"
+    "brand_logo_file": "assets/enaex_logo.png",
+    "web_pdf_style": {
+      "logo_file": "enaex-logo.png",
+      "red": "#E31B23",
+      "navy": "#273747",
+      "text": "#263746",
+      "muted": "#68727B",
+      "rule": "#D5D9DC",
+      "header_fill": "#F1F3F5",
+      "alternate_fill": "#FAFBFC",
+      "page_margin_mm": 13.5,
+      "table_inset_mm": 2.12,
+      "logo_width_mm": 41.73,
+      "logo_height_mm": 12.5,
+      "logo_top_mm": 4,
+      "top_rule_mm": 19.5,
+      "plan_baseline_mm": 31.3,
+      "table_header_top_mm": 33.79,
+      "table_header_height_mm": 7.06,
+      "table_row_height_mm": 4.233,
+      "column_widths_mm": [23, 52, 54, 54],
+      "footer_rule_mm": 286.5,
+      "footer_page_baseline_mm": 291
+    }
   },
   "logging": {
     "level": "INFO",
