@@ -1,0 +1,70 @@
+{
+  "project_root": ".",
+  "directories": {
+    "input": "imput",
+    "output": "output",
+    "logs": "logs"
+  },
+  "execution": {
+    "run_id_strategy": "timestamp",
+    "timestamp_format": "%Y%m%d_%H%M%S"
+  },
+  "inputs": {
+    "format": "dxf",
+    "dxf": {
+      "file_name": "opit.dxf",
+      "id_layer": "Number",
+      "id_entity_type": "TEXT",
+      "id_match_tolerance_m": 0.5,
+      "drawing_units_to_meters": 1.0,
+      "planned": {
+        "role": "planned",
+        "label": "Prevista",
+        "layer_name": "Theoretical Hole",
+        "entity_type": "LINE",
+        "depth_measure": "3d_length",
+        "id_column": "ID",
+        "depth_column": "Depth"
+      },
+      "realized": {
+        "role": "realized",
+        "label": "Realizada",
+        "layer_name": "Real Hole",
+        "entity_type": "POLYLINE",
+        "depth_measure": "3d_path_length",
+        "id_column": "Number",
+        "depth_column": "Length (m)"
+      }
+    }
+  },
+  "rules": {
+    "depth_tolerance_m": 0.3,
+    "outlier_threshold_m": 20.0,
+    "duplicate_id_policy": "error",
+    "incomplete_row_policy": "ignore_with_warning",
+    "outlier_rule": "planned_or_realized_gt_threshold",
+    "minimum_matched_rows": 1,
+    "detail_rows_per_page": 53,
+    "top_deviation_count": 10,
+    "outlier_preview_count": 20
+  },
+  "outputs": {
+    "pdf_template": "RELATORIO_PROFUNDIDADES_{run_id}.pdf",
+    "csv_template": "RELATORIO_PROFUNDIDADES_{run_id}_BASE_ANALITICA.csv",
+    "log_template": "RELATORIO_PROFUNDIDADES_{run_id}.log",
+    "report_plan_id": "PC590926",
+    "report_plan_label": "ID DO PLANO",
+    "report_table_headers": {
+      "id": "ID",
+      "planned": "Prof. prevista (m)",
+      "realized": "Prof. realizada (m)",
+      "variation": "Variação (m)"
+    },
+    "brand_logo_file": "assets/enaex_logo.png"
+  },
+  "logging": {
+    "level": "INFO",
+    "console": true,
+    "file": true
+  }
+}

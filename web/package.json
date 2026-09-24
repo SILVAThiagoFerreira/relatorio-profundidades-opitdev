@@ -1,0 +1,1 @@
+{"name":"relatorio-profundidades-opitdev","version":"1.0.0","private":true,"type":"module","scripts":{"dev":"vite --host","build":"vite build","test":"node --test tests/*.test.js"},"dependencies":{"dxf-parser":"^1.1.2","jspdf":"^4.2.1"},"devDependencies":{"vite":"^7.3.1"}}
