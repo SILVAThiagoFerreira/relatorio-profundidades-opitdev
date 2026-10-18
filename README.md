@@ -31,12 +31,12 @@ O sistema le geometrias previstas e realizadas de um DXF, valida IDs e profundid
 - Se um ID nao tiver geometria real correspondente, o PDF mantem o ID e a profundidade prevista e deixa profundidade realizada e variacao em branco; a ausencia fica registrada no log.
 
 ## Saidas geradas
-- PDF simples, em fundo branco, com identidade visual ENAEX, contendo IDs e profundidades extraidos do DXF e variacao; o ID do plano aparece acima da tabela em todas as paginas.
+- PDF simples, em fundo branco, com titulo vermelho em caixa alta (ID do plano), subtitulo cinza, tabela com linhas horizontais finas e rodape discreto com numero da pagina; o cabecalho do plano aparece em todas as paginas.
 - CSV analitico com o comparativo linha a linha.
 - Log textual da execucao.
 
 ## Configuracao
-Toda regra ajustavel fica em `config.json`: fonte de entrada, nomes de arquivo e camadas, tipos de entidade, fator de unidades, tolerancia de associacao, tolerancia de aderencia, limite de outlier, ID do plano, rotulos da tabela, arquivo do logotipo e linhas por pagina. O logotipo usado pelo relatorio fica em `assets/enaex_logo.png`.
+Toda regra ajustavel fica em `config.json`: fonte de entrada, nomes de arquivo e camadas, tipos de entidade, fator de unidades, tolerancia de associacao, tolerancia de aderencia, limite de outlier, ID do plano, rotulos da tabela, subtitulo do relatorio (`outputs.report_subtitle`), arquivo do logotipo e linhas por pagina. O logotipo usado pelo relatorio fica em `assets/enaex_logo.png`.
 
 ## Como executar
 ```bash

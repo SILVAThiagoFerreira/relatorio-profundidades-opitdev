@@ -37,19 +37,16 @@ export function buildPdf(result, planId, runId, config, logoDataUrl) {
   for (let page = 0; page < pages; page++) {
     if (page) pdf.addPage();
     pdf.addImage(logoDataUrl,'PNG',pageWidth - style.page_margin_mm - style.logo_width_mm,style.logo_top_mm,style.logo_width_mm,style.logo_height_mm);
-    pdf.setDrawColor(style.red);pdf.setLineWidth(0.247);
-    pdf.line(style.page_margin_mm,style.top_rule_mm,pageWidth-style.page_margin_mm,style.top_rule_mm);
 
-    pdf.setFont('helvetica','bold');pdf.setFontSize(12);
-    pdf.setTextColor(style.red);
     const planX = tableX + 2.12;
-    pdf.text(config.outputs.report_plan_label,planX,style.plan_baseline_mm);
-    pdf.setTextColor(style.navy);
-    pdf.text(planId,planX+pdf.getTextWidth(config.outputs.report_plan_label)+2.1,style.plan_baseline_mm);
+    pdf.setFont('helvetica','bold');pdf.setFontSize(15);pdf.setTextColor(style.red);
+    const title = `${config.outputs.report_plan_label} ${planId}`.toUpperCase();
+    pdf.text(title,planX,style.plan_baseline_mm);
+    pdf.setFont('helvetica','normal');pdf.setFontSize(8.5);pdf.setTextColor(style.subtitle);
+    pdf.text(config.outputs.report_subtitle,planX,style.subtitle_baseline_mm);
 
-    pdf.setFillColor(style.header_fill);
-    pdf.rect(tableX,style.table_header_top_mm,tableWidth,style.table_header_height_mm,'F');
     pdf.setFontSize(8.2);pdf.setTextColor(style.navy);
+    pdf.setFont('helvetica','bold');
     const headings = Object.values(config.outputs.report_table_headers);
     headings.forEach((heading,i)=>pdf.text(heading,(bounds[i]+bounds[i+1])/2,style.table_header_top_mm+4.85,{align:'center'}));
     pdf.setDrawColor(style.navy);pdf.setLineWidth(0.28);
@@ -59,7 +56,6 @@ export function buildPdf(result, planId, runId, config, logoDataUrl) {
     result.rows.slice(page*rowsPerPage,(page+1)*rowsPerPage).forEach((row,index)=>{
       const top=headerBottom+index*style.table_row_height_mm;
       const bottom=top+style.table_row_height_mm;
-      if(index%2){pdf.setFillColor(style.alternate_fill);pdf.rect(tableX,top,tableWidth,style.table_row_height_mm,'F');}
       const baseline=top+3.06;
       pdf.text(String(row.id),(bounds[0]+bounds[1])/2,baseline,{align:'center'});
       pdf.text(n(row.prevista),bounds[2]-2.12,baseline,{align:'right'});
@@ -69,10 +65,10 @@ export function buildPdf(result, planId, runId, config, logoDataUrl) {
       pdf.line(tableX,bottom,bounds.at(-1),bottom);
     });
 
-    pdf.setDrawColor(style.rule);pdf.setLineWidth(0.159);
+    pdf.setDrawColor(style.dark_rule);pdf.setLineWidth(0.14);
     pdf.line(style.page_margin_mm,style.footer_rule_mm,pageWidth-style.page_margin_mm,style.footer_rule_mm);
-    pdf.setFontSize(7);pdf.setTextColor(style.muted);
-    pdf.text(String(page+1),pageWidth-style.page_margin_mm,style.footer_page_baseline_mm,{align:'right'});
+    pdf.setFont('helvetica','normal');pdf.setFontSize(7);pdf.setTextColor(style.muted);
+    pdf.text(`${planId} · PÁGINA ${page+1}`.toUpperCase(),pageWidth-style.page_margin_mm,style.footer_page_baseline_mm,{align:'right'});
   }
   return pdf;
 }

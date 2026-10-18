@@ -195,6 +195,9 @@ def load_config(config_path: str | Path) -> AppConfig:
     log_template = str(_require(outputs, "log_template", "outputs")).strip()
     report_plan_id = str(_require(outputs, "report_plan_id", "outputs")).strip()
     report_plan_label = str(_require(outputs, "report_plan_label", "outputs")).strip()
+    report_subtitle = str(_require(outputs, "report_subtitle", "outputs")).strip()
+    if not report_subtitle:
+        raise ConfigError("Config key 'outputs.report_subtitle' must be non-empty")
     header_data = _require(outputs, "report_table_headers", "outputs")
     if not isinstance(header_data, dict):
         raise ConfigError("Config key 'outputs.report_table_headers' must be an object")
@@ -259,6 +262,7 @@ def load_config(config_path: str | Path) -> AppConfig:
         log_template=log_template,
         report_plan_id=report_plan_id,
         report_plan_label=report_plan_label,
+        report_subtitle=report_subtitle,
         report_table_headers=report_table_headers,
         brand_logo_path=brand_logo_path,
         logging_level=logging_level,

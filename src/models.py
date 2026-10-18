@@ -71,6 +71,7 @@ class AppConfig:
     log_template: str
     report_plan_id: str
     report_plan_label: str
+    report_subtitle: str
     report_table_headers: tuple[str, str, str, str]
     brand_logo_path: Path | None
     logging_level: str

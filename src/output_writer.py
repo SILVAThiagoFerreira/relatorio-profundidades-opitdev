@@ -17,13 +17,12 @@ from reportlab.platypus import PageBreak, Paragraph, SimpleDocTemplate, Table, T
 from .exceptions import OutputError
 from .models import AppConfig, ReportResult
 
-ENAEX_RED = colors.HexColor("#E31B23")
-ENAEX_NAVY = colors.HexColor("#273747")
-TEXT = colors.HexColor("#263746")
-MUTED = colors.HexColor("#68727B")
-RULE = colors.HexColor("#D5D9DC")
-HEADER_FILL = colors.HexColor("#F1F3F5")
-WHITE = colors.white
+ENAEX_RED = colors.HexColor("#B5121B")
+GRAPHITE = colors.HexColor("#3D4148")
+SUBTITLE = colors.HexColor("#4A4F55")
+TEXT = colors.HexColor("#3D4148")
+MUTED = colors.HexColor("#8A8F96")
+RULE = colors.HexColor("#E3E3E3")
 
 
 def _fmt_num(value: float | int | None, digits: int = 2, signed: bool = False) -> str:
@@ -37,20 +36,12 @@ def _make_list_table(
     records: list[tuple[int, float | None, float | None, float | None]],
     config: AppConfig,
 ) -> Table:
-    plan_style = ParagraphStyle(
-        "plan_id",
-        fontName="Helvetica-Bold",
-        fontSize=12,
-        leading=15,
-        textColor=ENAEX_NAVY,
-        alignment=0,
-    )
     column_style = ParagraphStyle(
         "column_header",
         fontName="Helvetica-Bold",
         fontSize=8.2,
         leading=10,
-        textColor=ENAEX_NAVY,
+        textColor=GRAPHITE,
         alignment=1,
     )
     id_style = ParagraphStyle(
@@ -70,12 +61,13 @@ def _make_list_table(
         alignment=2,
     )
 
-    plan_text = (
-        f'<font color="{ENAEX_RED.hexval()}">{escape(config.report_plan_label)}</font>'
-        f'&nbsp;&nbsp;<b>{escape(config.report_plan_id)}</b>'
+    title_text = escape(f"{config.report_plan_label} {config.report_plan_id}".upper())
+    header_text = (
+        f'<font name="Helvetica-Bold" size="15" color="{ENAEX_RED.hexval()}">{title_text}</font>'
+        f'<br/><font name="Helvetica" size="8.5" color="{SUBTITLE.hexval()}">{escape(config.report_subtitle)}</font>'
     )
     data: list[list[object]] = [
-        [Paragraph(plan_text, plan_style), "", "", ""],
+        [Paragraph(header_text, ParagraphStyle("plan_header", fontName="Helvetica", fontSize=8.5, leading=20, textColor=TEXT)), "", "", ""],
         [Paragraph(escape(label), column_style) for label in config.report_table_headers],
     ]
     for hole_id, planned_depth, realized_depth, variation in records:
@@ -95,21 +87,17 @@ def _make_list_table(
     commands = [
         ("SPAN", (0, 0), (-1, 0)),
         ("VALIGN", (0, 0), (-1, -1), "MIDDLE"),
-        ("BACKGROUND", (0, 1), (-1, 1), HEADER_FILL),
-        ("LINEBELOW", (0, 1), (-1, 1), 0.8, ENAEX_NAVY),
+        ("LINEBELOW", (0, 1), (-1, 1), 0.8, GRAPHITE),
         ("LINEBELOW", (0, 2), (-1, -1), 0.35, RULE),
         ("LEFTPADDING", (0, 0), (-1, -1), 6),
         ("RIGHTPADDING", (0, 0), (-1, -1), 6),
-        ("TOPPADDING", (0, 0), (-1, 0), 5),
-        ("BOTTOMPADDING", (0, 0), (-1, 0), 6),
+        ("TOPPADDING", (0, 0), (-1, 0), 2),
+        ("BOTTOMPADDING", (0, 0), (-1, 0), 8),
         ("TOPPADDING", (0, 1), (-1, 1), 5),
         ("BOTTOMPADDING", (0, 1), (-1, 1), 5),
         ("TOPPADDING", (0, 2), (-1, -1), 1.3),
         ("BOTTOMPADDING", (0, 2), (-1, -1), 1.3),
     ]
-    for row_index in range(2, len(data)):
-        if (row_index - 2) % 2 == 1:
-            commands.append(("BACKGROUND", (0, row_index), (-1, row_index), colors.HexColor("#FAFBFC")))
     table.setStyle(TableStyle(commands))
     return table
 
@@ -134,16 +122,13 @@ def _draw_page_chrome(c: canvas.Canvas, doc: SimpleDocTemplate, config: AppConfi
             mask="auto",
         )
 
-    c.setStrokeColor(ENAEX_RED)
-    c.setLineWidth(0.7)
-    c.line(doc.leftMargin, A4[1] - 1.95 * cm, A4[0] - doc.rightMargin, A4[1] - 1.95 * cm)
-
-    c.setStrokeColor(RULE)
-    c.setLineWidth(0.45)
+    c.setStrokeColor(GRAPHITE)
+    c.setLineWidth(0.4)
     c.line(doc.leftMargin, 1.05 * cm, A4[0] - doc.rightMargin, 1.05 * cm)
     c.setFont("Helvetica", 7)
     c.setFillColor(MUTED)
-    c.drawRightString(A4[0] - doc.rightMargin, 0.68 * cm, str(c.getPageNumber()))
+    footer = f"{config.report_plan_id} · Página {c.getPageNumber()}".upper()
+    c.drawRightString(A4[0] - doc.rightMargin, 0.68 * cm, footer)
     c.restoreState()
 
 

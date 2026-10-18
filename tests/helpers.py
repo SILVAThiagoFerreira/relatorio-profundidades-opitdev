@@ -102,6 +102,7 @@ def build_sample_project(
             "log_template": "RELATORIO_PROFUNDIDADES_{run_id}.log",
             "report_plan_id": "TEST-PLAN",
             "report_plan_label": "ID DO PLANO",
+            "report_subtitle": "Profundidades previstas e realizadas por furo.",
             "report_table_headers": {
                 "id": "ID",
                 "planned": "Prof. prevista (m)",
